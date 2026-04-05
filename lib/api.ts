@@ -6,9 +6,15 @@ interface ResponseResult {
   totalPages: number;
 }
 
-export async function fetchNotes(search: string, page: number): Promise<ResponseResult> {
+export async function fetchNotes(search: string, page: number, tag: string = ''): Promise<ResponseResult> {
+  let url = `https://notehub-public.goit.study/api/notes?search=${search}&page=${page}&perPage=12`
+
+  if (tag) {
+    url = `https://notehub-public.goit.study/api/notes?search=${search}&page=${page}&tag=${tag}&perPage=12`
+  }
+
   const result = await axios.get<ResponseResult>(
-    `https://notehub-public.goit.study/api/notes?search=${search}&page=${page}&perPage=12`,
+    url,
     {
       headers: {
         accept: "application/json",

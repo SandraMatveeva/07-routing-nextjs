@@ -8,7 +8,6 @@ interface ModalProps {
 }
 
 export default function Modal({ onClose, children }: ModalProps) {
-
   // ✅ Закриття по Escape + блок скролу
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -42,10 +41,8 @@ export default function Modal({ onClose, children }: ModalProps) {
       aria-modal="true"
       onClick={handleBackdropClick}
     >
-      <div className={styles.modal}>
-        {children}
-      </div>
+      <div className={styles.modal}>{children}</div>
     </div>,
-    document.body
+    document.body,
   );
 }
