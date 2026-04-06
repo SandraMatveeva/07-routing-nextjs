@@ -14,37 +14,20 @@ import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./page.module.css";
 
-const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
-
 type NotesClientProps = {
   initialPage?: number;
   initialSearch?: string;
-  slug: string[];
+  tag: string;
 };
 
 export default function NotesClient({
   initialPage = 1,
   initialSearch = "",
-  slug,
+  tag,
 }: NotesClientProps) {
   const [page, setPage] = useState(initialPage);
   const [search, setSearch] = useState(initialSearch);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  console.log("gggg", slug);
-
-  let tag: string = slug[0]; // todo
-
-  // if (tags.includes(tag)) {
-  //   tag = tag
-  // } else {
-  //   tag = ''
-  // }
-
-  if (!tags.includes(tag)) {
-    tag = ''
-  }
-  
 
   const { data, isLoading, error, isSuccess } = useQuery({
     queryKey: ["notes", page, search, tag],
@@ -65,7 +48,7 @@ export default function NotesClient({
   const totalPages = data?.totalPages ?? 0;
 
   if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage message="Failed to load notes" />;
+  if (error || notes.length === 0 ) return <ErrorMessage message="Failed to load notes" />;
 
   return (
     <div className={css.app}>
