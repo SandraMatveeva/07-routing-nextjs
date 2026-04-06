@@ -48,7 +48,8 @@ export default function NotesClient({
   const totalPages = data?.totalPages ?? 0;
 
   if (isLoading) return <Loader />;
-  if (error || notes.length === 0 ) return <ErrorMessage message="Failed to load notes" />;
+  if (error) return <ErrorMessage message="Failed to load notes" />;
+  if (notes.length === 0 ) <div>Нихуя нет</div>
 
   return (
     <div className={css.app}>
