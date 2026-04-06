@@ -49,7 +49,7 @@ export default function NotesClient({
 
   if (isLoading) return <Loader />;
   if (error) return <ErrorMessage message="Failed to load notes" />;
-  if (notes.length === 0 ) <div>Нихуя нет</div>
+  if (notes.length === 0 ) return <div>Нихуя нет</div>
 
   return (
     <div className={css.app}>
