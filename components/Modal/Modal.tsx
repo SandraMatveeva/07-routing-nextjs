@@ -6,16 +6,16 @@ import { useEffect } from "react";
 
 
 interface ModalProps {
-  //onClose: () => void;
+  onClose: () => void;
   children: React.ReactNode;
 }
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children, onClose}: ModalProps) {
   // ✅ Закриття по Escape + блок скролу
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        //onClose();
+        onClose();
       }
     };
 
@@ -28,12 +28,12 @@ export default function Modal({ children }: ModalProps) {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [onClose]);
 
   // ✅ Закриття по backdrop
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      //onClose();
+      onClose();
     }
   };
 

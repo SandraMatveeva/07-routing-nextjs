@@ -26,7 +26,7 @@ const NotePreview = () => {
 
   const back = () => router.back();
   return (
-    <Modal>
+    <Modal onClose={back}>
       <div className={css.container}>
         <div className={css.item}>
           <div className={css.header}>
